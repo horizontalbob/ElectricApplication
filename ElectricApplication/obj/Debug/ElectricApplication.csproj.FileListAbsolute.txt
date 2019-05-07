@@ -1,0 +1,9 @@
+C:\dev\ElectricApplication\ElectricApplication\bin\Debug\ElectricApplication.exe.config
+C:\dev\ElectricApplication\ElectricApplication\bin\Debug\ElectricApplication.exe
+C:\dev\ElectricApplication\ElectricApplication\bin\Debug\ElectricApplication.pdb
+C:\dev\ElectricApplication\ElectricApplication\obj\Debug\ElectricApplication.csprojResolveAssemblyReference.cache
+C:\dev\ElectricApplication\ElectricApplication\obj\Debug\ElectricApplication.Properties.Resources.resources
+C:\dev\ElectricApplication\ElectricApplication\obj\Debug\ElectricApplication.csproj.GenerateResource.Cache
+C:\dev\ElectricApplication\ElectricApplication\obj\Debug\ElectricApplication.csproj.CoreCompileInputs.cache
+C:\dev\ElectricApplication\ElectricApplication\obj\Debug\ElectricApplication.exe
+C:\dev\ElectricApplication\ElectricApplication\obj\Debug\ElectricApplication.pdb
