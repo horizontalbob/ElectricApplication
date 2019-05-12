@@ -27,11 +27,12 @@ namespace ElectricApplication
         }
         public void deposit(double dblDepositAmount)
         {
-            // add code for deposit here
+            this.dblBalance -= this.dblBalance - dblDepositAmount;
         }
         public string recordUnits(double dblUnitsUsed)
         {
-            this.dblUnits += dblUnitsUsed;
+            this.dblUnits = dblUnitsUsed; //could be a += to add on rather than replace each time
+            this.dblBalance = dblUnits * dblUnitCost;
             return dblUnitsUsed != 0 ? "Value successfully updated" : "Current value unchanged, please review your input";
         }
         public int getAccRefNo()
@@ -60,7 +61,8 @@ namespace ElectricApplication
         }
         public void updateUnitCost(double dblNewUnitCost)
         {
-            // add code for updateUnitCost here
+            this.dblUnitCost = dblNewUnitCost;
+            this.dblBalance = dblUnits * dblUnitCost;
         }
         public Boolean closeAccount()
         {

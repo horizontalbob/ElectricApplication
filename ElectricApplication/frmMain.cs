@@ -57,16 +57,23 @@ namespace ElectricApplication
                 lblOutput.Text = "New account added.";
             }
         }
+
+        /// <summary>
+        /// Reorders the base array and redisplays
+        /// </summary>
         private void sortAccounts()
         {
             if (radioButton1.Checked)
             {
-                data = data.Where(a => a != null).OrderBy(s => s.getBalance()).ToArray();
+                data = data.Where(a => a != null).OrderByDescending(s => s.getBalance()).ToArray();
             }
             else
             {
                 data = data.Where(a => a != null).OrderBy(s => s.getAccRefNo()).ToArray();
             }
+
+            Array.Resize<Account>(ref data, 5);
+            listAccounts();
         }
         private void btnRecord_Click(object sender, EventArgs e)
         {
@@ -78,6 +85,8 @@ namespace ElectricApplication
                     var account = data[lstAccounts.SelectedIndex];
                     double.TryParse(txtRecUnits.Text, out value);
                     lblOutput.Text = account == null ? "Please select an account" : lblOutput.Text = account.recordUnits(value);
+                    txtUnitsUsed.Text = account.getUnits().ToString();
+                    txtBalance.Text = account.getBalance().ToString();
                 }
                 catch// don't really care about the exception so just swallow it
                 {
@@ -87,8 +96,26 @@ namespace ElectricApplication
         }
         private void btnPayment_Click(object sender, EventArgs e)
         {
-            // code for recording a payment .. TO DO
-            lblOutput.Text = "Pressing this button should record a payment";
+            double value;
+            if (!string.IsNullOrEmpty(txtPayment.Text))
+            {
+                try
+                {
+                    var account = data[lstAccounts.SelectedIndex];
+                    double.TryParse(txtPayment.Text, out value);
+                    account.deposit(value);
+                    txtUnitCost.Text = account.getUnitCost().ToString(); //get the value and update the textbox
+                    txtBalance.Text = account.getBalance().ToString();
+                }
+                catch// don't really care about the exception so just swallow it
+                {
+                    lblOutput.Text = "Please select an account";
+                }
+            }
+            else
+            {
+                lblOutput.Text = "Please enter a value";
+            }
         }
         private void btnSetUnits_Click(object sender, EventArgs e)
         {
@@ -101,6 +128,7 @@ namespace ElectricApplication
                     double.TryParse(txtSetUnits.Text, out value);
                     account.updateUnitCost(value);
                     txtUnitCost.Text = account.getUnitCost().ToString(CultureInfo.CurrentCulture); //get the value and update the textbox
+                    txtBalance.Text = account.getBalance().ToString(CultureInfo.CurrentCulture);
                 }
                 catch// don't really care about the exception so just swallow it
                 {
@@ -121,21 +149,34 @@ namespace ElectricApplication
         }
         private void btnClose_Click(object sender, EventArgs e)
         {
-            // code for Close account button .. TO DO
-            lblOutput.Text = "Press this button to close an account";
+            data = data.Where(d => d != null && d.getBalance() > 0).ToArray(); //assuming minus value (account in credit) is also valid to close. see below if this assumption is wrong
+            // data = data.Where(d => d != null && d.getBalance() != 0).ToArray(); 
+            Array.Resize<Account>(ref data, 5);
+            recalculateClassVars();
+            sortAccounts();
         }
         private void lstAccounts_SelectedIndexChanged(object sender, EventArgs e)
         {
             // get selected account and add details to form
             int index = lstAccounts.SelectedIndex;
-            Account temp = data[index];
-            txtRef.Text = temp.getAccRefNo() + "";
-            txtName.Text = temp.getName() + "";
-            txtAdd.Text = temp.getAddress();
-            txtUnitsUsed.Text = temp.getUnits().ToString(CultureInfo.CurrentCulture);
-            txtUnitCost.Text = temp.getUnitCost().ToString(CultureInfo.CurrentCulture);
-            txtBalance.Text = temp.getBalance().ToString(CultureInfo.CurrentCulture);
-            lblOutput.Text = "You will need to add information to the other Textbox items";
+            if (index >= 0)
+            {
+                Account temp = data[index];
+                txtRef.Text = temp.getAccRefNo() + "";
+                txtName.Text = temp.getName() + "";
+                txtAdd.Text = temp.getAddress();
+                txtUnitsUsed.Text = temp.getUnits().ToString(CultureInfo.CurrentCulture);
+                txtUnitCost.Text = temp.getUnitCost().ToString(CultureInfo.CurrentCulture);
+                txtBalance.Text = temp.getBalance().ToString(CultureInfo.CurrentCulture);
+                lblOutput.Text = "You will need to add information to the other Textbox items";
+            }
+        }
+
+        private void recalculateClassVars()
+        {
+            var tempCount = data.Count(d => d != null);
+            count = tempCount; //not sure about using count as a class level variable. Should really be .Length when needed
+            nextRef = tempCount + 1; //I feel nextRef should also be calculated
         }
     }
 }
