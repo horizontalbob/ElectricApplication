@@ -70,8 +70,20 @@ namespace ElectricApplication
         }
         private void btnRecord_Click(object sender, EventArgs e)
         {
-            lstAccounts.SelectedItems
-            lblOutput.Text = "Pressing this button should record units used";
+            double value;
+            if (data != null && data.Length != 0)
+            {
+                try
+                {
+                    var account = data[lstAccounts.SelectedIndex];
+                    double.TryParse(txtRecUnits.Text, out value);
+                    lblOutput.Text = account == null ? "Please select an account" : lblOutput.Text = account.recordUnits(value);
+                }
+                catch// don't really care about the exception so just swallow it
+                {
+                    lblOutput.Text = "Please select an account";
+                }
+            }
         }
         private void btnPayment_Click(object sender, EventArgs e)
         {
@@ -80,8 +92,25 @@ namespace ElectricApplication
         }
         private void btnSetUnits_Click(object sender, EventArgs e)
         {
-            // code for set units .. TO DO
-            lblOutput.Text = "Pressing this button should set price per unit";
+            double value;
+            if (!string.IsNullOrEmpty(txtSetUnits.Text))
+            {
+                try
+                {
+                    var account = data[lstAccounts.SelectedIndex];
+                    double.TryParse(txtSetUnits.Text, out value);
+                    account.updateUnitCost(value);
+                    txtUnitCost.Text = account.getUnitCost().ToString(CultureInfo.CurrentCulture); //get the value and update the textbox
+                }
+                catch// don't really care about the exception so just swallow it
+                {
+                    lblOutput.Text = "Please select an account";
+                }
+            }
+            else
+            {
+                lblOutput.Text = "Please enter a value";
+            }
         }
         private void btnSort_Click(object sender, EventArgs e)
         {
@@ -106,7 +135,6 @@ namespace ElectricApplication
             txtUnitsUsed.Text = temp.getUnits().ToString(CultureInfo.CurrentCulture);
             txtUnitCost.Text = temp.getUnitCost().ToString(CultureInfo.CurrentCulture);
             txtBalance.Text = temp.getBalance().ToString(CultureInfo.CurrentCulture);
-            // some more to do here to complete this .. TO DO
             lblOutput.Text = "You will need to add information to the other Textbox items";
         }
     }

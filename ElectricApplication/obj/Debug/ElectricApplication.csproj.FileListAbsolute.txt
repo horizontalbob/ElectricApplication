@@ -7,3 +7,13 @@ C:\dev\ElectricApplication\ElectricApplication\obj\Debug\ElectricApplication.csp
 C:\dev\ElectricApplication\ElectricApplication\obj\Debug\ElectricApplication.csproj.CoreCompileInputs.cache
 C:\dev\ElectricApplication\ElectricApplication\obj\Debug\ElectricApplication.exe
 C:\dev\ElectricApplication\ElectricApplication\obj\Debug\ElectricApplication.pdb
+D:\dev\ElectricApplication\ElectricApplication\bin\Debug\ElectricApplication.exe.config
+D:\dev\ElectricApplication\ElectricApplication\bin\Debug\ElectricApplication.exe
+D:\dev\ElectricApplication\ElectricApplication\bin\Debug\ElectricApplication.pdb
+D:\dev\ElectricApplication\ElectricApplication\obj\Debug\ElectricApplication.csprojResolveAssemblyReference.cache
+D:\dev\ElectricApplication\ElectricApplication\obj\Debug\ElectricApplication.frmMain.resources
+D:\dev\ElectricApplication\ElectricApplication\obj\Debug\ElectricApplication.Properties.Resources.resources
+D:\dev\ElectricApplication\ElectricApplication\obj\Debug\ElectricApplication.csproj.GenerateResource.cache
+D:\dev\ElectricApplication\ElectricApplication\obj\Debug\ElectricApplication.csproj.CoreCompileInputs.cache
+D:\dev\ElectricApplication\ElectricApplication\obj\Debug\ElectricApplication.exe
+D:\dev\ElectricApplication\ElectricApplication\obj\Debug\ElectricApplication.pdb

@@ -29,9 +29,10 @@ namespace ElectricApplication
         {
             // add code for deposit here
         }
-        public void recordUnits(double dblUnitsUsed)
+        public string recordUnits(double dblUnitsUsed)
         {
-            // add code for recordUnits here
+            this.dblUnits += dblUnitsUsed;
+            return dblUnitsUsed != 0 ? "Value successfully updated" : "Current value unchanged, please review your input";
         }
         public int getAccRefNo()
         {
