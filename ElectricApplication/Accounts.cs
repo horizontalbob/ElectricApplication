@@ -25,15 +25,18 @@ namespace ElectricApplication
             dblUnits = 0.0;
             boolActive = true;
         }
-        public void deposit(double dblDepositAmount)
+        public string deposit(double dblDepositAmount)
         {
-            this.dblBalance -= this.dblBalance - dblDepositAmount;
+            if ((this.dblBalance - dblDepositAmount) < 0) return "Not enough owed on account to make this payment";
+            this.dblBalance -= dblDepositAmount;
+            return "Payment accepted";
         }
         public string recordUnits(double dblUnitsUsed)
         {
-            this.dblUnits = dblUnitsUsed; //could be a += to add on rather than replace each time
-            this.dblBalance = dblUnits * dblUnitCost;
-            return dblUnitsUsed != 0 ? "Value successfully updated" : "Current value unchanged, please review your input";
+            if(dblUnitsUsed > 0) return "Current value unchanged, please review your input";
+            this.dblUnits += dblUnitsUsed;
+            this.dblBalance += dblUnits * dblUnitCost;
+            return "Value successfully updated";
         }
         public int getAccRefNo()
         {
@@ -63,16 +66,6 @@ namespace ElectricApplication
         {
             this.dblUnitCost = dblNewUnitCost;
             this.dblBalance = dblUnits * dblUnitCost;
-        }
-        public Boolean closeAccount()
-        {
-            // add code for closeAccount here - return true if successfully closed
-            // and false otherwise
-            return false;
-        }
-        public Boolean isActive()
-        {
-            return boolActive;
         }
     }
 }
